@@ -1,3 +1,4 @@
+
 (function(){
 
 	angular.module('app')
@@ -42,8 +43,8 @@
 						characters : function(dataService){
 							let inpObj = {
 								urlPre : 'https://www.anapioficeandfire.com/api/characters?page=',
-								pageLimiter : 107,//107
-								initialValue : 0,
+								pageLimiter : 107,
+								initialValue : 1,
 								urlSuf : '&pageSize=20'
 							};
 							return dataService.getRequestedData(inpObj)
