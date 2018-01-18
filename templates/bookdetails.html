@@ -1,0 +1,37 @@
+<div ng-cloak>
+	<table>
+		<tr>
+			<th class="th-heading" colspan="2">{{$ctrl.bookDetail.name}}</th>
+		</tr>
+		<tr class = "tr-list">
+			<td>Author</td>
+			<td><span ng-repeat = "author in $ctrl.bookDetail.authors">{{author}} <br></span></td>
+		</tr>
+		<tr>
+			<td>ISBN</td>
+			<td>{{$ctrl.bookDetail.isbn}}</td>
+		</tr>
+		<tr>
+			<td>Publisher</td>
+			<td>{{$ctrl.bookDetail.publisher}}</td>
+		</tr>
+		<tr>
+			<td>Pages</td>
+			<td>{{$ctrl.bookDetail.numberOfPages}}</td>
+		</tr>
+		<tr>
+			<td>Release Date</td>
+			<td>{{$ctrl.bookDetail.released | date : MM/DD/YYYY}}</td>
+		</tr>
+		<tr class = "tr-list" ng-show = "$ctrl.bookDetail.bookPovCharacters.length > 0">
+			<td>POV Characters</td>
+			<td>
+				<ul class="list-horizontal" style="padding:0">
+					<li ng-repeat = "character in $ctrl.bookDetail.bookPovCharacters">
+						<a ui-sref = "characterDetails({characterUrl : character.characterUrl})">{{character.characterName}}</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

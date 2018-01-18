@@ -1,0 +1,97 @@
+
+<div ng-cloak>
+	<table>
+		<tr ng-show = "$ctrl.characterDetail.name.length != 0 ">
+			<th class="th-heading" colspan="2">{{$ctrl.characterDetail.name}}</th>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.characterDetail.aliases[0].length != 0">
+			<td>Aliases</td>
+			<td>
+				<ul class="list-horizontal" style="padding: 0">
+					<li ng-repeat = "alias in $ctrl.characterDetail.aliases">
+						{{alias}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.characterDetail.titles[0].length != 0">
+			<td>Titles</td>
+			<td>
+				<ul class="list-horizontal"  style="padding: 0">
+					<li ng-repeat = "title in $ctrl.characterDetail.titles">
+						{{title}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+
+		<tr ng-show = "$ctrl.characterDetail.charAllegiance.length != 0">
+			<td>Allegiances</td>
+			<td>
+				<ul class="list-horizontal"  style="padding: 0">
+					<li ng-repeat = "house in $ctrl.characterDetail.charAllegiance">
+						<a ui-sref="houseDetails({houseUrl : house.houseUrl})">{{house.houseName}}</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.father.length != 0">
+			<td>Father</td>
+			<td><a ui-sref="characterDetails({characterUrl : $ctrl.characterDetail.father})">{{$ctrl.characterDetail.charFather}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.mother.length != 0">
+			<td>Mother</td>
+			<td><a ui-sref="characterDetails({characterUrl : $ctrl.characterDetail.mother})">{{$ctrl.characterDetail.charMother}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.spouse.length != 0">
+			<td>Spouse</td>
+			<td><a ui-sref="characterDetails({characterUrl : $ctrl.characterDetail.spouse})">{{$ctrl.characterDetail.charSpouse}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.born.length != 0">
+			<td>Born</td>
+			<td>{{$ctrl.characterDetail.born}}</td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.died.length != 0">
+			<td>Died</td>
+			<td>{{$ctrl.characterDetail.died}}</td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.gender.length != 0">
+			<td>Gender</td>
+			<td>{{$ctrl.characterDetail.gender}}</td>
+		</tr>
+		<tr ng-show = "$ctrl.characterDetail.culture.length != 0">
+			<td>Culture</td>
+			<td>{{$ctrl.characterDetail.culture}}</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.characterDetail.playedBy[0].length != 0">
+			<td>Played By</td>
+			<td>
+				<ul class="list-horizontal" style="padding: 0">
+					<li ng-repeat="actor in $ctrl.characterDetail.playedBy" >
+						{{actor}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.characterDetail.povInBooks.length != 0">
+			<td>POV Books</td>
+			<td>
+				<ul class="list-horizontal"  style="padding : 0;">
+					<li ng-repeat = "book in $ctrl.characterDetail.povInBooks">
+						<a ui-sref="bookDetails({bookUrl : book.bookUrl})">{{book.bookName}}</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.characterDetail.tvSeries[0].length != 0">
+			<td>Seasons</td>
+			<td>
+				<ul class="list-horizontal"  style="padding: 0">
+					<li ng-repeat = "season in $ctrl.characterDetail.tvSeries">
+						{{season}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

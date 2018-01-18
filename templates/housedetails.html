@@ -1,0 +1,80 @@
+<div class="table-card">
+		
+	<table>
+		<tr ng-show = "$ctrl.houseDetail.name.length != 0 ">
+			<th class="th-heading" colspan="2">{{$ctrl.houseDetail.name}}</th>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.region.length != 0">
+			<td>Region</td>
+			<td>{{$ctrl.houseDetail.region}}</td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.seats[0].length != 0">
+			<td>Seats</td>
+			<td>
+				<ul class="list-horizontal" style="padding : 0">
+					<li ng-repeat = "seat in $ctrl.houseDetail.seats">
+						{{seat}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.houseDetail.titles[0].length != 0">
+			<td>Titles</td>
+			<td>
+				<ul class="list-horizontal" style="padding:0">
+					<li ng-repeat = "title in $ctrl.houseDetail.titles">
+						{{title}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.houseCurrentLord.length != 0">
+			<td>Current Lord</td>
+			<td><a ui-sref="characterDetails({characterUrl : $ctrl.houseDetail.currentLord})">{{$ctrl.houseDetail.houseCurrentlord}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.houseFounder.length != 0">
+			<td>Founder</td>
+			<td><a ui-sref="characterDetails({characterUrl : $ctrl.houseDetail.founder})">{{$ctrl.houseDetail.houseFounder}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.houseHeir.length != 0">
+			<td>Heir</td>
+			<td><a ui-sref="characterDetails({characterUrl : $ctrl.houseDetail.heir})">{{$ctrl.houseDetail.houseHeir}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.houseOverlord.length != 0">
+			<td>Overlord</td>
+			<td><a ui-sref="houseDetails({houseUrl : $ctrl.houseDetail.overlord})">{{$ctrl.houseDetail.houseOverlord}}</a></td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.coatOfArms.length != 0">
+			<td>Coat of Arms</td>
+			<td>{{$ctrl.houseDetail.coatOfArms}}</td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.founded.length != 0">
+			<td>Founded</td>
+			<td>{{$ctrl.houseDetail.founded}}</td>
+		</tr>
+		<tr ng-show = "$ctrl.houseDetail.diedOut.length != 0">
+			<td>Died Out</td>
+			<td>{{$ctrl.houseDetail.diedOut}}</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.houseDetail.houseCadetBranches.length != 0">
+			<td>Cadet Branches</td>
+			<td>
+				<ul class="list-horizontal" style="padding: 0">
+					<li ng-repeat = "cadetBranch in $ctrl.houseDetail.houseCadetBranches">
+						<a ui-sref = "houseDetails({houseUrl : cadetBranch.houseUrl})">{{cadetBranch.houseName}}</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr class="tr-list" ng-show = "$ctrl.houseDetail.houseSwornMembers.length != 0">
+			<td>Sworn Members</td>
+			<td>
+				<ul class="list-horizontal" style="padding: 0">
+					<li ng-repeat = "member in $ctrl.houseDetail.houseSwornMembers">
+						<a ui-sref="characterDetails({characterUrl : member.memberUrl})">{{member.memberName}}</a>
+					</li>	
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

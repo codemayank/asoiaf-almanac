@@ -1,0 +1,36 @@
+
+<div class="container">
+	<div class="list-view-header">
+
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model = "charName" name="charName" placeholder="Search By Character Name">	
+		</div>
+		<div class="form-group">
+			<select class="custom-select" ng-model="$ctrl.sortProperty">	
+				<option value=""  selected disabled hidden>Sort</option>
+				<option value="name" selected>A-Z</option>
+				<option value="-name">Z-A</option>
+			</select>	
+		</div>
+		<div class="form-group">
+			<select class="custom-select" ng-model="search.gender">
+				<option value=""  selected disabled hidden>Gender</option>
+				<option value="Female">Female</option>
+				<option value="!Female">Male</option>
+				<option value="Male" selected>All</option>
+			</select>	
+		</div>
+			
+	</div>
+	<h1>Character-list</h1>
+	<div class="wrapper">
+		<div class="grid-card" ng-repeat = "character in $ctrl.characters | orderBy:'name' | filter : charName | orderBy: $ctrl.sortProperty | filter : search.gender ">
+			<a ui-sref="characterDetails({characterUrl : character.url})">
+				<div class="card-body">
+					<h5 class="card-title">{{character.name}}</h5>
+					<h6 class="card-subtitle mb-2 text-muted">{{character.aliases[0]}}</h6>  	
+				</div>
+			</a> 
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+		
+
+<div class="container">
+
+	<div class="list-view-header">
+
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model = "bookName" name="charName" placeholder="Search By Book Name or Book Author">	
+		</div>
+		<div class="form-group">
+			<select class="custom-select" ng-model="$ctrl.sortProperty">	
+				<option value=""  selected disabled hidden>Sort</option>
+				<option value="name" selected>A-Z</option>
+				<option value="-name">Z-A</option>
+			</select>	
+		</div>
+		<div class="form-group">
+			<select class="custom-select" ng-model="$ctrl.sortByYear">
+				<option value=""  selected disabled hidden>Sort by Year Published</option>
+				<option value="released">First - Last</option>
+				<option value="-released">Latest -First</option>
+			</select>	
+		</div>
+			
+	</div>
+
+	<h4>List of Books</h4>
+	<div class="wrapper">
+		<div class="grid-card" ng-repeat = "book in $ctrl.books | orderBy : 'bookName' | filter : bookName | orderBy : $ctrl.sortProperty | orderBy : $ctrl.sortByYear" class="col-lg-3">
+			<div class="card-body">
+				<a ui-sref="bookDetails({bookUrl : book.url})">
+					<h5 class="card-title">{{book.name}}</h5>
+					<ul class="list-horizontal" style="padding: 0">
+						<li ng-repeat = "author in book.authors">{{author}}</li>
+					</ul>
+				</a>	
+			</div>
+		</div>
+	</div>
+</div>
+
+		
