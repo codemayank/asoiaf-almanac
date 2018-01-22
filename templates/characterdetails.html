@@ -30,7 +30,7 @@
 			<td>
 				<ul class="list-horizontal"  style="padding: 0">
 					<li ng-repeat = "house in $ctrl.characterDetail.charAllegiance">
-						<a ui-sref="houseDetails({houseUrl : house.houseUrl})">{{house.houseName}}</a>
+						<a ui-sref="houseDetails({houseUrl : house.memberUrl})">{{house.memberName}}</a>
 					</li>
 				</ul>
 			</td>
@@ -78,7 +78,7 @@
 			<td>
 				<ul class="list-horizontal"  style="padding : 0;">
 					<li ng-repeat = "book in $ctrl.characterDetail.povInBooks">
-						<a ui-sref="bookDetails({bookUrl : book.bookUrl})">{{book.bookName}}</a>
+						<a ui-sref="bookDetails({bookUrl : book.memberUrl})">{{book.memberName}}</a>
 					</li>
 				</ul>
 			</td>

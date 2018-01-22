@@ -20,7 +20,7 @@
 			}
 
 			return $q.all(promiseStack)
-				.then(sendResponseData)		
+				.then(sendResponseData)
 				.catch(sendGetDataError)
 
 		}// end of getRequestedData
@@ -46,105 +46,58 @@
 				if (transformed.url.indexOf("/books/") !== -1){
 					transformed.bookPovCharacters = [];
 
-					transformed.povCharacters.forEach(function(characterUrl){
-						$http.get(characterUrl, {cache: true})
-							.then(function(response){
-								transformed.bookPovCharacters.push({
-									characterName : response.data.name,
-									characterUrl : response.data.url
-								});
-							})
-							.catch(function(errorMsg){
-								console.log(errorMsg);
-							})
-					})	
+					if(transformed.povCharacters.length != 0){
+						transformed.bookPovCharacters = makeobj(transformed.povCharacters, transformed.bookPovCharacters);
+					}
 				}
 
 				if (transformed.url.indexOf("/characters/") !== -1){
 					transformed.povInBooks = [];
 					transformed.charAllegiance = [];
-					transformed.charFather = "";
-					transformed.charMother = "";
-					transformed.charSpouse = "";
 
 					if(transformed.father.length != 0){
 						$http.get(transformed.father, {cache: true})
 						.then(function(response){
-							transformed.charFather = response.data.name; 
+							transformed.charFather = response.data.name
 						})
-						.catch(function(errorMsg){
-							console.log(errorMsg)
-						})	
+						.catch(sendGetDataError)
 					}
-					
-					if(transformed.mother.length != 0){
+
+				if(transformed.mother.length != 0){
 						$http.get(transformed.mother, {cache: true})
 						.then(function(response){
-							transformed.charMother = response.data.name;
+							transformed.charMother = response.data.name
 						})
-						.catch(function(errorMsg){
-							console.log(errorMsg)
-						})	
+						.catch(sendGetDataError)
 					}
 
 					if(transformed.spouse.length != 0){
 						$http.get(transformed.spouse, {cache: true})
 						.then(function(response){
-							transformed.charSpouse = response.data.name;
+							transformed.charSpouse = response.data.name
 						})
-						.catch(function(errorMsg){
-							console.log(errorMsg)
-						})	
+						.catch(sendGetDataError);
 					}
-					
+
 					if(transformed.povBooks.length != 0){
-						transformed.povBooks.forEach(function(bookUrl){
-							$http.get(bookUrl, {cache: true})
-								.then(function(response){
-									transformed.povInBooks.push({
-										bookName : response.data.name,
-										bookUrl : response.data.url
-									});
-								})
-								.catch(function(errorMsg){
-									console.log(errorMsg);
-								})
-						})
+						transformed.povInBooks = makeobj(transformed.povBooks, transformed.povInBooks);
 					}
-					
+
 					if(transformed.allegiances.length != 0){
-						transformed.allegiances.forEach(function(houseUrl){
-							$http.get(houseUrl, {cache: true})
-								.then(function(response){
-									transformed.charAllegiance.push({
-										houseName : response.data.name,
-										houseUrl : response.data.url
-									});
-								})
-								.catch(function(errorMsg){
-									console.log(errorMsg);
-								})
-						})	
+						transformed.charAllegiance = makeobj(transformed.allegiances, transformed.charAllegiance);
 					}
-						
 				}
 
 				if(transformed.url.indexOf("/houses/") != -1){
 					transformed.houseCadetBranches = [];
 					transformed.houseSwornMembers = [];
-					transformed.houseCurrentlord = "";
-					transformed.houseHeir = "";
-					transformed.houseOverlord = "";
-					transformed.houseFounder = "";
 
 					if(transformed.currentLord.length != 0){
 						$http.get(transformed.currentLord, {cache: true})
 							.then(function(response){
-								transformed.houseCurrentlord = response.data.name;
+								transformed.houseCurrentlord = response.data.name
 							})
-							.catch(function(errorMsg){
-								console.log(errorMsg)
-							});	
+							.catch(sendGetDataError)
 					}
 
 					if(transformed.heir.length != 0){
@@ -152,64 +105,52 @@
 							.then(function(response){
 								transformed.houseHeir = response.data.name;
 							})
-							.catch(function(errorMsg){
-								console.log(errorMsg)
-							});
+							.catch(sendGetDataError)
 					}
 
 					if(transformed.overlord.length != 0){
 						$http.get(transformed.overlord, {cache: true})
 							.then(function(response){
-								transformed.houseOverlord = response.data.name;
+								transformed.houseOverlord = response.data.name
 							})
-							.catch(function(errorMsg){
-								console.log(errorMsg)
-							});
+							.catch(sendGetDataError)
 					}
 
 					if(transformed.founder.length != 0){
 						$http.get(transformed.founder, {cache: true})
 							.then(function(response){
-								transformed.houseFounder = response.data.name;
+								transformed.houseFounder = response.data.name
 							})
-							.catch(function(errorMsg){
-								console.log(errorMsg)
-							});
+							.catch(sendGetDataError)
 					}
 
 					if(transformed.cadetBranches.length != 0){
-						transformed.cadetBranches.forEach(function(branch){
-							$http.get(branch, {cache: true})
-								.then(function(response){
-									transformed.houseCadetBranches.push({
-										houseName : response.data.name,
-										houseUrl : response.data.url
-									})
-								})
-								.catch(function(errorMsg){
-									console.log(errorMsg)
-								});
-						})		
+						transformed.houseCadetBranches = makeobj(transformed.cadetBranches, transformed.houseCadetBranches);
 					}
 
 					if(transformed.swornMembers.length != 0){
-						transformed.swornMembers.forEach(function(member){
-							$http.get(member, {cache: true})
-								.then(function(response){
-									transformed.houseSwornMembers.push({
-										memberName : response.data.name,
-										memberUrl : response.data.url
-									})
-								})
-								.catch(function(errorMsg){
-									console.log(errorMsg)
-								})
-						})
-					}	
+							transformed.houseSwornMembers = makeobj(transformed.swornMembers, transformed.houseSwornMembers);
+					}
 				}
 			console.log(transformed);
 			return transformed;
 		} //end of tansformSingleData
+
+		function makeobj(refobj, newArray){
+				if(refobj.constructor === Array){
+					refobj.forEach(function(member){
+						$http.get(member, {cache : true})
+							.then(function(response){
+								newArray.push({
+									memberName : response.data.name,
+									memberUrl : response.data.url
+								})
+							})
+							.catch(sendGetDataError)
+					})
+					return newArray;
+				}
+			}
 
 		function sendResponseData(response){
 			let retArr = [];
